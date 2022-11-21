@@ -1,2 +1,7 @@
-# cc_football_club
-App to fetch and display football clubs data 
+# Getting Started with Create React App
+
+- i18n
+- MUI
+  -- List
+  -- AppBar für Header + Button
+  -- Seperator

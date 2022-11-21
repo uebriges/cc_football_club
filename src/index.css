@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.ListItemClubContainer {
+  display: flex;
+}
+
+/* .ListItemClubImage {
+  grid-column: 1;
+}
+
+*/
+.ListClubInfo {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ListClubInfoCountryAndValue {
+  font-size: 80%;
+}
+
+.clubDetailsImageAndCountry {
+  background: #333333;
+  margin: auto;
+  width: 100%;
+}
+
+.clubDetailsInfo {
+  padding: 20px;
+}

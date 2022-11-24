@@ -40,3 +40,13 @@ code {
 .clubDetailsInfo {
   padding: 20px;
 }
+
+.country {
+  color: white;
+  position: relative;
+  bottom: 30px;
+  left: 30px;
+  font-size: 1.4rem;
+  display: inline-block;
+  width: auto;
+}

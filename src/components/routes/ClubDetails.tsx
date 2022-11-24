@@ -43,7 +43,7 @@ export default function ClubDetails() {
           style={{ margin: 'auto' }}
           className="ListItemClubImage"
         />
-        <div>{currentClub.country}</div>
+        <p className="country">{currentClub.country}</p>
       </div>
       <div className="clubDetailsInfo">
         Der Club <b>{currentClub.name}</b> aus {currentClub.country} hat einen

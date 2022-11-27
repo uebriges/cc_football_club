@@ -2,17 +2,20 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Image from 'mui-image';
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 
 export default function ClubDetails() {
   const navigate = useNavigate();
-  const { clubId } = useParams();
-  console.log('clubId: ', clubId);
-  const clubs: any = useLoaderData();
-  console.log('clubs: ', clubs);
+  const locationState = useLocation().state;
+  const clubLoaderData: any = useLoaderData();
 
-  const currentClub = clubId ? clubs[clubId] : null;
-  console.log('currentClub: ', currentClub);
+  let club;
+
+  if (locationState) {
+    club = locationState.club;
+  } else {
+    club = clubLoaderData;
+  }
 
   return (
     <>
@@ -35,7 +38,7 @@ export default function ClubDetails() {
       </AppBar>
       <div className="clubDetailsImageAndCountry">
         <Image
-          src={currentClub.image}
+          src={club.image}
           alt="Logo"
           fit="contain"
           // width="100"
@@ -43,11 +46,11 @@ export default function ClubDetails() {
           style={{ margin: 'auto' }}
           className="ListItemClubImage"
         />
-        <p className="country">{currentClub.country}</p>
+        <p className="country">{club.country}</p>
       </div>
       <div className="clubDetailsInfo">
-        Der Club <b>{currentClub.name}</b> aus {currentClub.country} hat einen
-        Wert von {currentClub.value} Millionen Euro.
+        Der Club <b>{club.name}</b> aus {club.country} hat einen Wert von{' '}
+        {club.value} Millionen Euro.
       </div>
     </>
   );

@@ -1,8 +1,8 @@
 import SortIcon from '@mui/icons-material/Sort';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import List from '@mui/material/List';
-import { useEffect, useState } from 'react';
-import getClubs from '../../helpers/getClubs';
+import { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import { TClub } from '../../types/TClub';
 import ListItemClub from '../ListItemClub';
 
@@ -11,14 +11,24 @@ import ListItemClub from '../ListItemClub';
 // }
 
 export default function Home() {
-  const [clubs, setClubs] = useState<TClub[]>([]);
+  const clubsData: any = useLoaderData();
+  const [sortedAsc, setSortedAsc] = useState<boolean>(true);
+  const [clubs] = useState<TClub[]>(clubsData);
 
-  useEffect(() => {
-    (async () => {
-      const result = await getClubs();
-      setClubs(result);
-    })();
-  });
+  const handleSort = () => {
+    console.log('click');
+    if (sortedAsc) {
+      console.log('asc');
+      clubs.sort((a: TClub, b: TClub) => a.name.localeCompare(b.name));
+      localStorage.setItem('ascSort', false.toString());
+      setSortedAsc(false);
+    } else {
+      console.log('desc');
+      clubs.sort((a: TClub, b: TClub) => a.name.localeCompare(b.name) * -1);
+      localStorage.setItem('ascSort', true.toString());
+      setSortedAsc(true);
+    }
+  };
 
   return (
     <div>
@@ -32,7 +42,7 @@ export default function Home() {
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            // onClick={handleMenu}
+            onClick={handleSort}
             color="inherit"
           >
             <SortIcon />
@@ -40,9 +50,9 @@ export default function Home() {
         </Toolbar>
       </AppBar>
       <List>
-        {clubs.map((club: any, index: number) => (
-          <ListItemClub club={club} index={index} />
-        ))}
+        {clubs.map((club: any, index: number) => {
+          return <ListItemClub club={club} index={index} />;
+        })}
       </List>
     </div>
   );

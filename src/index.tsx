@@ -1,5 +1,4 @@
 import './index.css';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ClubDetails from './components/routes/ClubDetails';
@@ -12,13 +11,20 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+    loader: async ({ params }): Promise<TClub[]> => {
+      return await getClubs();
+    },
   },
   {
     path: '/detailsview/:clubId',
     element: <ClubDetails />,
-    loader: async ({ params }): Promise<TClub[]> => {
-      console.log('params loaded: ', params);
-      return await getClubs();
+    loader: async ({ params }): Promise<TClub | undefined> => {
+      const { clubId } = params;
+      if (clubId) {
+        const clubs = await getClubs();
+        return clubs[parseInt(clubId)];
+      }
+      return;
     },
   },
 ]);
@@ -27,10 +33,10 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-    {/* <App /> */}
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <RouterProvider router={router} />,
+  // {/* <App /> */}
+  // </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

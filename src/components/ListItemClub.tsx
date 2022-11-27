@@ -12,12 +12,16 @@ export default function ListItemClub(props: IListItemClubProps) {
   const { club, index } = props;
   const navigate = useNavigate();
 
+  console.log('index in listItem: ', index);
+
   return (
     <ListItemButton
       divider={true}
-      onClick={() => navigate(`/detailsview/${index}`)}
+      onClick={() =>
+        navigate(`/detailsview/${index}`, { state: { club, index } })
+      }
     >
-      <div className="ListItemClubContainer">
+      <div className="ListItemClubContainer" key={club.id}>
         <Image
           src={club.image}
           alt="Logo"

@@ -1,7 +1,11 @@
 # Getting Started with Create React App
 
+Missing:
+
 - i18n
-- MUI
-  -- List
-  -- AppBar für Header + Button
-  -- Seperator
+- Sort
+
+Problems:
+
+- Class names could be better
+- Had to check how router works

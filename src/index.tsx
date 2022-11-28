@@ -1,9 +1,9 @@
-import './index.css';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ClubDetails from './components/routes/ClubDetails';
 import Home from './components/routes/Home';
 import getClubs from './helpers/getClubs';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { TClub } from './types/TClub';
 
@@ -12,7 +12,16 @@ const router = createBrowserRouter([
     path: '/',
     element: <Home />,
     loader: async ({ params }): Promise<TClub[]> => {
-      return await getClubs();
+      const originalClubList = await getClubs();
+      if (localStorage.getItem('ascSort') === 'true') {
+        return originalClubList.sort(
+          (a: TClub, b: TClub) => a.name.localeCompare(b.name) * -1,
+        );
+      } else {
+        return originalClubList.sort((a: TClub, b: TClub) =>
+          a.name.localeCompare(b.name),
+        );
+      }
     },
   },
   {

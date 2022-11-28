@@ -12,18 +12,17 @@ import ListItemClub from '../ListItemClub';
 
 export default function Home() {
   const clubsData: any = useLoaderData();
-  const [sortedAsc, setSortedAsc] = useState<boolean>(true);
+  const [sortedAsc, setSortedAsc] = useState<boolean>(
+    localStorage.getItem('ascSort') === 'true',
+  );
   const [clubs] = useState<TClub[]>(clubsData);
 
   const handleSort = () => {
-    console.log('click');
     if (sortedAsc) {
-      console.log('asc');
       clubs.sort((a: TClub, b: TClub) => a.name.localeCompare(b.name));
       localStorage.setItem('ascSort', false.toString());
       setSortedAsc(false);
     } else {
-      console.log('desc');
       clubs.sort((a: TClub, b: TClub) => a.name.localeCompare(b.name) * -1);
       localStorage.setItem('ascSort', true.toString());
       setSortedAsc(true);

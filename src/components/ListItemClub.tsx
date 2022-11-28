@@ -12,8 +12,6 @@ export default function ListItemClub(props: IListItemClubProps) {
   const { club, index } = props;
   const navigate = useNavigate();
 
-  console.log('index in listItem: ', index);
-
   return (
     <ListItemButton
       divider={true}
